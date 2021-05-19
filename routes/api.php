@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\UsersController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/auth/register', [AuthController::class, 'register']);
-Route::post('/auth/token', [AuthController::class, 'token']);
+Route::post('/auth/register', [RegisterController::class, 'register']);
+Route::post('/auth/token', [LoginController::class, 'token']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('me', [UsersController::class, 'me']);
+    Route::get('me', [UserController::class, 'me']);
 });

@@ -17,8 +17,27 @@ services:
     networks:
       - parking_project
 
+  mysql_test:
+    image: mysql:8.0.25
+    container_name: parking_mysql_testing
+    environment:
+      MYSQL_DATABASE: parking
+      MYSQL_ROOT_PASSWORD: kjsdofiys9d8fw3j.-
+      MYSQL_USER: application_user
+      MYSQL_PASSWORD: l3kjhj324undn
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
+    ports:
+      - 3388:3306
+    volumes:
+      - parking_mysql_testing:/data/mysql
+    networks:
+      - parking_project
+
+
 volumes:
   parking_mysql:
+    driver: local
+  parking_mysql_testing:
     driver: local
 
 networks:
