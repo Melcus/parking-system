@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Garage;
 use Illuminate\Database\Seeder;
 
 class GarageSeeder extends Seeder
@@ -13,6 +14,6 @@ class GarageSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Garage::factory(10)->create();
     }
 }

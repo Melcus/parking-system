@@ -24,10 +24,10 @@ class PriceFactory extends Factory
     public function definition(): array
     {
         return [
-            'garage_id' => Garage::factory()->create(),
+            'garage_id' => Garage::factory(),
             'size_id'   => Size::inRandomOrder()->first()->id,
             'base'      => rand(100, 5000),
-            'rates'     => []
+            'rates'     => null
         ];
     }
 }

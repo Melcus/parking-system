@@ -24,7 +24,7 @@ class SpotFactory extends Factory
     public function definition(): array
     {
         return [
-            'garage_id' => Garage::factory()->create(),
+            'garage_id' => Garage::factory(),
             'size_id'   => Size::inRandomOrder()->first()->id,
             'floor'     => rand(-15, 15),
             'number'    => rand(1, 150),

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,10 +20,12 @@ class VehicleFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition() : array
     {
         return [
-
+            'user_id'    => User::factory(),
+            'license'    => $this->faker->bothify('??##???'),
+            'free_entry' => $this->faker->boolean(10)
         ];
     }
 }

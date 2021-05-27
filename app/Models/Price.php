@@ -12,6 +12,6 @@ class Price extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'rates' => 'array'
+        'rates' => 'json'
     ];
 }
