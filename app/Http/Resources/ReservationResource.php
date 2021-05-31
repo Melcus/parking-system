@@ -17,11 +17,11 @@ class ReservationResource extends JsonResource
     {
         return [
             'id'         => $this->id,
-            'spot_id'    => $this->spot_id,
-            'start'      => $this->start,
-            'end'        => $this->end,
-            'paid_at'    => $this->paid_at,
-            'created_at' => $this->created_at
+            'spot_id'    => (string)$this->spot_id,
+            'start'      => $this->start->toDateTimeString(),
+            'end'        => $this->end->toDateTimeString(),
+            'paid_at'    => optional($this->paid_at)->toDateTimeString(),
+            'created_at' => $this->created_at->toDateTimeString()
         ];
     }
 }

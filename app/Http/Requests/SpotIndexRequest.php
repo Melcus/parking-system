@@ -14,8 +14,8 @@ class SpotIndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start' => ['sometimes', 'date'],
-            'end'   => ['sometimes', 'date']
+            'start' => ['sometimes', 'date', 'after_or_equal:now'],
+            'end'   => ['sometimes', 'date', 'after:start']
         ];
     }
 }
