@@ -193,4 +193,10 @@ class ReservationTest extends TestCase
 
         $this->assertDatabaseCount('reservations', 0);
     }
+
+
+    public function test_cannot_create_reservations_for_the_same_spot_with_overlapping_intervals()
+    {
+        self::markTestIncomplete('implement');
+    }
 }

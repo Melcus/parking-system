@@ -13,13 +13,6 @@ class GarageTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
     public function test_garages_endpoint()
     {
         $garage = Garage::factory()->create();

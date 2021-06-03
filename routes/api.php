@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\GarageController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\SpotController;
@@ -16,6 +17,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('reservations', [ReservationController::class, 'store']);
     Route::patch('reservations/{reservation}', [ReservationController::class, 'update']);
     Route::delete('reservations/{reservation}', [ReservationController::class, 'destroy']);
+    Route::post('/calculate-payment', PaymentController::class);
 });
 
 Route::middleware(['internal'])->group(function () {

@@ -37,7 +37,7 @@ class Spot extends Model
         return $this->belongsTo(Size::class);
     }
 
-    public function scopeFilter(Builder $query, array $filters)
+    public function scopeFilter(Builder $query, array $filters): void
     {
         //                      |---------|
         // case1      |---|                                     // happy
@@ -52,13 +52,6 @@ class Spot extends Model
                     ['start', '<=', Carbon::parse(Arr::get($filters, 'end'))],
                     ['end', '>=', Carbon::parse(Arr::get($filters, 'start'))],
                 ]);
-
-//                $start = Carbon::parse(Arr::get($filters, 'start'));
-//                $end = Carbon::parse(Arr::get($filters, 'end'));
-//                $query->whereBetween('start', [$start, $end])
-//                    ->orWhereBetween('end', [$start, $end])
-//                    ->orWhereRaw('? BETWEEN start and end', [$start])
-//                    ->orWhereRaw('? BETWEEN start and end', [$end]);
             });
         });
     }
