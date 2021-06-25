@@ -16,10 +16,11 @@ class SpotResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'     => $this->id,
-            'size'   => $this->size->name,
-            'floor'  => $this->floor,
-            'number' => $this->number
+            'id'         => $this->id,
+            'size'       => $this->size->name,
+            'floor'      => $this->floor,
+            'number'     => $this->number,
+            'attributes' => $this->spotAttributes->pluck('name')
         ];
     }
 }

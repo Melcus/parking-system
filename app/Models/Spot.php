@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Filters\Spot\SpotFilters;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,22 +38,8 @@ class Spot extends Model
         return $this->belongsTo(Size::class);
     }
 
-    public function scopeFilter(Builder $query, array $filters): void
+    public function scopeFilter(Builder $query, array $filters): Builder
     {
-        //                      |---------|
-        // case1      |---|                                     // happy
-        // case2                                |---|           // happy
-        // case3       |------------|                           // unhappy
-        // case4                   |--|                         // unhappy
-        // case5                      |--------|                // unhappy
-        // case6     |-----------------------------|            // unhappy
-        $query->when(Arr::has($filters, ['start', 'end']), function (Builder $query) use ($filters) {
-            $query->whereDoesntHave('reservations', function (Builder $query) use ($filters) {
-                $query->where([
-                    ['start', '<=', Carbon::parse(Arr::get($filters, 'end'))],
-                    ['end', '>=', Carbon::parse(Arr::get($filters, 'start'))],
-                ]);
-            });
-        });
+        return (new SpotFilters($filters))->filter($query);
     }
 }

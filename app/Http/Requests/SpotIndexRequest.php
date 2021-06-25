@@ -14,8 +14,21 @@ class SpotIndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start' => ['sometimes', 'date', 'after_or_equal:now'],
-            'end'   => ['sometimes', 'date', 'after:start']
+            'datetime_range.start' => ['sometimes', 'date', 'after_or_equal:now'],
+            'datetime_range.end'   => ['sometimes', 'date', 'after:start'],
+            'size'                 => ['nullable', 'string', 'in:small,medium,large'],
+            'attributes'           => ['sometimes', 'array'],
+            'attributes.*'         => ['required', 'string', 'in:electric,for_women,handicapped,with_kids']
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        return $this->merge([
+            'datetime_range' => [
+                'start' => $this->get('start'),
+                'end'   => $this->get('end'),
+            ]
+        ]);
     }
 }

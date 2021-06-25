@@ -22,5 +22,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::middleware(['internal'])->group(function () {
     Route::get('garages', [GarageController::class, 'index']);
+    Route::get('garages/{garage}', [GarageController::class, 'show']);
     Route::get('garages/{garage}/spots', [SpotController::class, 'index']);
 });

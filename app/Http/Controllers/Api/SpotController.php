@@ -15,6 +15,7 @@ class SpotController extends Controller
             $garage
                 ->spots()
                 ->filter($request->validated())
+                ->with('spotAttributes')
                 ->with('size')
                 ->get()
         );
