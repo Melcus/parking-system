@@ -16,12 +16,13 @@ class ReservationResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'         => $this->id,
-            'spot_id'    => (string)$this->spot_id,
-            'start'      => $this->start->toDateTimeString(),
-            'end'        => $this->end->toDateTimeString(),
-            'paid_at'    => optional($this->paid_at)->toDateTimeString(),
-            'created_at' => $this->created_at->toDateTimeString()
+            'id'           => $this->id,
+            'spot_id'      => (string)$this->spot_id,
+            'start'        => $this->start->toDateTimeString(),
+            'end'          => $this->end->toDateTimeString(),
+            'paid_at'      => optional($this->paid_at)->toDateTimeString(),
+            'paid_amount'  => $this->paid_amount,
+            'created_at'   => $this->created_at->toDateTimeString()
         ];
     }
 }

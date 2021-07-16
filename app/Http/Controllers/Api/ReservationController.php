@@ -14,6 +14,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReservationController extends Controller
 {
+    public function show(Request $request, Reservation $reservation): ReservationResource
+    {
+        return new ReservationResource($reservation);
+    }
+
     public function store(ReservationCreateRequest $request): ReservationResource
     {
         $reservation = $request->user()->reservations()->create($request->validated());

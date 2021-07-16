@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\GarageController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\PaymentController;
@@ -14,10 +15,12 @@ Route::post('/auth/token', [LoginController::class, 'token']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('me', [UserController::class, 'me']);
+    Route::get('reservations/{reservation:uuid}', [ReservationController::class, 'show']);
     Route::post('reservations', [ReservationController::class, 'store']);
     Route::patch('reservations/{reservation}', [ReservationController::class, 'update']);
     Route::delete('reservations/{reservation}', [ReservationController::class, 'destroy']);
     Route::post('/calculate-payment', PaymentController::class);
+    Route::get('checkout/{reservation}', [CheckoutController::class, 'show']);
 });
 
 Route::middleware(['internal'])->group(function () {

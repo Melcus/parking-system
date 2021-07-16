@@ -24,4 +24,9 @@ class ReservationPolicy
     {
         return (int)$user->id === (int)$reservation->user_id;
     }
+
+    public function pay(User $user, Reservation $reservation): bool
+    {
+        return (int)$user->id === (int)$reservation->user_id && empty($reservation->paid_at);
+    }
 }
