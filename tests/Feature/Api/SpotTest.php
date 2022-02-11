@@ -12,7 +12,7 @@ class SpotTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_spots_endpoint_returns_only_spots_belonging_to_this_garage()
+    public function test_spots_endpoint_returns_only_spots_belonging_to_this_garage(): void
     {
         $garage1 = Garage::factory()->create();
 
@@ -40,13 +40,13 @@ class SpotTest extends TestCase
             ->assertJsonFragment([
                 'id' => $spots->random()->id,
             ])->assertJsonFragment([
-                'floor' => "{$spots->random()->floor}",
+                'floor' => $spots->random()->floor,
             ])->assertJsonFragment([
-                'number' => "{$spots->random()->number}"
+                'number' => $spots->random()->number
             ]);
     }
 
-    public function test_it_filters_spots_by_date_availability()
+    public function test_it_filters_spots_by_date_availability(): void
     {
         $garage = Garage::factory()->create();
 

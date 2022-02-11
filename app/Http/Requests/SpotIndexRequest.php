@@ -24,11 +24,15 @@ class SpotIndexRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        return $this->merge([
-            'datetime_range' => [
-                'start' => $this->get('start'),
-                'end'   => $this->get('end'),
-            ]
-        ]);
+        if ($this->get('start') && $this->get('end')) {
+            return $this->merge([
+                'datetime_range' => [
+                    'start' => $this->get('start'),
+                    'end'   => $this->get('end'),
+                ]
+            ]);
+        }
+
+        return $this;
     }
 }

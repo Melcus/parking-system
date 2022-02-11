@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Api;
 
 use App\Models\Garage;
@@ -13,7 +15,7 @@ class GarageTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_garages_endpoint()
+    public function test_garages_endpoint(): void
     {
         $garage = Garage::factory()->create();
 
@@ -28,14 +30,14 @@ class GarageTest extends TestCase
                 'name'        => $garage->name,
                 'zipcode'     => $garage->zipcode,
                 'coordinates' => [
-                    'lng' => "{$garage->lng}",
-                    'lat' => "{$garage->lat}"
+                    'lng' => round($garage->lng, 4),
+                    'lat' => round($garage->lat, 4)
                 ],
-                'total_spots' => "2"
+                'total_spots' => 2
             ]);
     }
 
-    public function test_garages_endpoint_calculates_free_spots()
+    public function test_garages_endpoint_calculates_free_spots(): void
     {
         $garage = Garage::factory()->create();
 
@@ -62,16 +64,16 @@ class GarageTest extends TestCase
             ->assertStatus(200)
             ->assertJsonCount(1, 'data')
             ->assertJsonFragment([
-                'total_spots' => "2",
-                'free_spots'  => "1"
+                'total_spots' => 2,
+                'free_spots'  => 1
             ]);
 
         $this->travelTo(Carbon::parse("09/06/2021"));
 
         $this->getJson('/api/garages')
             ->assertJsonFragment([
-                'total_spots' => "2",
-                'free_spots'  => "2"
+                'total_spots' => 2,
+                'free_spots'  => 2
             ]);
     }
 

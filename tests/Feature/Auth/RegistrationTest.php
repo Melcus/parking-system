@@ -19,14 +19,9 @@ class RegistrationTest extends TestCase
             'name'                  => $this->faker->name(),
             'password'              => $password = Str::random(10),
             'password_confirmation' => $password
-        ])->assertStatus(201)
-            ->assertJsonStructure([
-                'access_token',
-                'token_type'
-            ]);
+        ])->assertStatus(201);
 
-        $this
-            ->assertDatabaseHas('users', ['email' => $email])
+        $this->assertDatabaseHas('users', ['email' => $email])
             ->assertDatabaseCount('users', 1);
     }
 
