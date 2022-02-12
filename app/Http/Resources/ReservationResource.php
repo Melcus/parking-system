@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -17,11 +19,11 @@ class ReservationResource extends JsonResource
     {
         return [
             'id'           => $this->id,
-            'spot_id'      => (string)$this->spot_id,
+            'spot_id'      => (int)$this->spot_id,
             'start'        => $this->start->toDateTimeString(),
             'end'          => $this->end->toDateTimeString(),
             'paid_at'      => optional($this->paid_at)->toDateTimeString(),
-            'paid_amount'  => $this->paid_amount,
+            'paid_amount'  => round($this->paid_amount ?? 0, 4),
             'created_at'   => $this->created_at->toDateTimeString()
         ];
     }

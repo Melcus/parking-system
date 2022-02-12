@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -18,8 +20,8 @@ class SpotResource extends JsonResource
         return [
             'id'         => $this->id,
             'size'       => $this->size->name,
-            'floor'      => $this->floor,
-            'number'     => $this->number,
+            'floor'      => (int)$this->floor,
+            'number'     => (int)$this->number,
             'attributes' => $this->spotAttributes->pluck('name')
         ];
     }

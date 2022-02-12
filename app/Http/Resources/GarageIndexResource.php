@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -20,11 +22,11 @@ class GarageIndexResource extends JsonResource
             'name'        => $this->name,
             'zipcode'     => $this->zipcode,
             'coordinates' => [
-                'lng' => $this->lng,
-                'lat' => $this->lat
+                'lng' => round($this->lng, 4),
+                'lat' => round($this->lat, 4)
             ],
-            'total_spots' => $this->total_spots,
-            'free_spots'  => $this->free_spots,
+            'total_spots' => (int)$this->total_spots,
+            'free_spots'  => (int)$this->free_spots,
         ];
     }
 }

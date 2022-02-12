@@ -78,7 +78,7 @@ class ReservationTest extends TestCase
             ])
             ->assertJsonFragment([
                 'id'      => 1,
-                'spot_id' => "{$spotId}",
+                'spot_id' => $spotId,
                 'paid_at' => null,
                 'start'   => $start->toDateTimeString(),
                 'end'     => $end->toDateTimeString()
